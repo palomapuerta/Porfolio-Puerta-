@@ -36,18 +36,71 @@
         <div class="contenido-seccion">
             <h2>CONTACTO</h2>
             <div class="fila">
-                <!-- Formulario -->
-                <div class="col">
-                    <input type="text" placeholder="Tú Nombre">
-                    <input type="text" placeholder="Número telefónico">
-                    <input type="text" placeholder="Dirección de correo">
-                    <input type="text" placeholder="Tema">
-                    <textarea name="" id="" cols="30" rows="10" placeholder="Mensaje"></textarea>
-                    <button>
-                        Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
-                        <span class="overlay"></span>
-                    </button>
-                </div>
+               <!-- Formulario -->
+<div class="col">
+    <form id="contactForm" onsubmit="return validateForm()">
+        <input type="text" id="name" placeholder="Tu Nombre" required>
+        <input type="text" id="phone" placeholder="Número telefónico" required pattern="\d{10}">
+        <input type="email" id="email" placeholder="Dirección de correo" required>
+        <input type="text" id="subject" placeholder="Tema" required>
+        <textarea id="message" cols="30" rows="10" placeholder="Mensaje" required></textarea>
+        <button type="submit">
+            Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
+            <span class="overlay"></span>
+        </button>
+    </form>
+</div>
+
+<script>
+function validateForm() {
+    let valid = true;
+    let errorMessage = "";
+
+    // Nombre
+    let name = document.getElementById("name").value;
+    if (name.trim() === "") {
+        valid = false;
+        errorMessage += "El nombre es obligatorio.\n";
+    }
+
+    // Teléfono
+    let phone = document.getElementById("phone").value;
+    let phonePattern = /^\d{10}$/;
+    if (!phonePattern.test(phone)) {
+        valid = false;
+        errorMessage += "El número telefónico debe tener 10 dígitos.\n";
+    }
+
+    // Correo electrónico
+    let email = document.getElementById("email").value;
+    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email)) {
+        valid = false;
+        errorMessage += "Por favor, ingresa un correo electrónico válido.\n";
+    }
+
+    // Tema
+    let subject = document.getElementById("subject").value;
+    if (subject.trim() === "") {
+        valid = false;
+        errorMessage += "El tema es obligatorio.\n";
+    }
+
+    // Mensaje
+    let message = document.getElementById("message").value;
+    if (message.trim() === "") {
+        valid = false;
+        errorMessage += "El mensaje es obligatorio.\n";
+    }
+
+    // Mostrar mensajes de error si hay
+    if (!valid) {
+        alert(errorMessage);
+    }
+
+    return valid;
+}
+</script>
                 <!-- Mapa -->
                 <div class="col">
                     <img src="#" alt="">
@@ -74,8 +127,8 @@
 
     <!-- footer -->
     <footer>
-        <a href="#inicio" class="arriba">
-            <i class="fa-solid fa-angles-up"></i>
+       <!-- <a href="#inicio" class="arriba"> 
+            <i class="fa-solid fa-angles-up"></i>-->
         </a>
         <div class="redes">
             <a href="https://x.com/PalomaPuerta4?t=uo4NbCPd7Z5BEoThgg9GaA&s=09"><i class="fa-brands fa-twitter"></i></a>
